@@ -1,7 +1,7 @@
 class ApiService {
   constructor() {
-    this.API_URL = "http://localhost:8000/";
-    this.API_PREFIX = "v1/";
+    this.API_URL = process.env.VUE_APP_API_URL;
+    this.API_PREFIX = process.env.VUE_APP_API_VERSION;
   }
 
   get(url) {
@@ -63,6 +63,4 @@ class ApiService {
   }
 }
 
-const apiService = new ApiService();
-
-export default apiService;
+export default new ApiService();
