@@ -1,4 +1,4 @@
-# trilu-vue
+# Trilu - Simple Trello Clone
 
 ## Project setup
 ```
