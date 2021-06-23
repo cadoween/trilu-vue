@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 import GuestLayout from "../../components/Layouts/GuestLayout";
 import ApiService from "../../helpers/ApiService";
 
@@ -72,14 +73,17 @@ export default {
       },
     };
   },
+  computed: {
+    ...mapGetters({
+      loginResponse: "getLoginResponse",
+    }),
+  },
   methods: {
+    ...mapActions(["doLogin"]),
     async handleLogin() {
-      const res = await ApiService.post("auth/login", this.loginData);
-      const data = await res.json();
+      await this.doLogin(this.loginData);
 
-      if (res.status === 200) {
-        localStorage.setItem("token", data.token);
-
+      if (this.loginResponse.ok) {
         await this.$router.push({ name: "Home" });
       }
     },
@@ -98,6 +102,7 @@ export default {
       }
     },
   },
+  watch: {},
 };
 </script>
 
